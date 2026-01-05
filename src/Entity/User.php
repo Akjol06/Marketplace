@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Post;
 use App\DTO\User\Input\RegisterUserInput;
 use App\DTO\User\Output\RegisterUserOutput;
 use App\Enum\UserRole;
+use App\Helper\EndpointRoutes;
 use App\Repository\UserRepository;
 use App\State\User\UserRegistrationProcessor;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new Post(
-            uriTemplate: '/users/register',
+            uriTemplate: EndpointRoutes::USER_REGISTER,
             input: RegisterUserInput::class,
             output: RegisterUserOutput::class,
             processor: UserRegistrationProcessor::class,
