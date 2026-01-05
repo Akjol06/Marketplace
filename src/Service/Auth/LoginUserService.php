@@ -3,9 +3,11 @@
 namespace App\Service\Auth;
 
 use App\DTO\Api\Input\LoginUserInput;
+use App\Entity\RefreshToken;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Uid\Uuid;
 
 class LoginUserService 
 {
@@ -26,5 +28,19 @@ class LoginUserService
         }
 
         return $user;
+    }
+
+    public function createRefreshToken(User $user): RefreshToken
+    {
+        $refreshToken = new RefreshToken();
+        $refreshToken->setToken(Uuid::v4()->toRfc4122());
+        $refreshToken->setUser($user);
+        $refreshToken->setExpiresAt(new \DateTimeImmutable('+30 days'));
+        $refreshToken->setRevoked(false);
+
+        $this->em->persist($refreshToken);
+        $this->em->flush();
+
+        return $refreshToken;
     }
 }

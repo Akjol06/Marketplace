@@ -18,10 +18,12 @@ class LoginUserProcessor implements ProcessorInterface
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): LoginUserOutput
     {
         $user = $this->login->login($data);
-
         
+        $refreshToken = $this->login->createRefreshToken($user);
+
         $out = new LoginUserOutput();
         $out->accessToken = $this->jwt->generate($user);
+        $out->refreshToken = $refreshToken->getToken();
         $out->expiresIn = 3600;
         $out->user = [
             'id' => $user->getId(),

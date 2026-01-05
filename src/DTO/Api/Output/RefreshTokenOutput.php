@@ -4,17 +4,14 @@ namespace App\DTO\Api\Output;
 
 use Symfony\Component\Serializer\Annotation\Groups;
 
-class LoginUserOutput
-{
-    #[Groups(['user:read'])]
+class RefreshTokenOutput
+{   
+    #[Groups(['auth:read'])]
     public string $refreshToken;
-    
+
     #[Groups(['user:read'])]
     public string $accessToken;
 
     #[Groups(['user:read'])]
     public int $expiresIn;
-
-    #[Groups(['user:read'])]
-    public array $user;
 }
