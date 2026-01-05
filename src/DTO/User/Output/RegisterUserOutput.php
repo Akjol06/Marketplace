@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO\Api\Output\Register;
+namespace App\DTO\User\Output;
 
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -18,3 +18,4 @@ class RegisterUserOutput
     #[Groups(['user:read'])]
     public string $createdAt;
 }
+

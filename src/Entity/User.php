@@ -4,11 +4,11 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
-use App\DTO\Api\Input\Register\RegisterUserInput;
-use App\DTO\Api\Output\Register\RegisterUserOutput;
+use App\DTO\User\Input\RegisterUserInput;
+use App\DTO\User\Output\RegisterUserOutput;
 use App\Enum\UserRole;
 use App\Repository\UserRepository;
-use App\State\Register\RegisterUserProcessor;
+use App\State\User\UserRegistrationProcessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             uriTemplate: '/users/register',
             input: RegisterUserInput::class,
             output: RegisterUserOutput::class,
-            processor: RegisterUserProcessor::class,
+            processor: UserRegistrationProcessor::class,
         ),
     ],
     normalizationContext: ['groups' => ['user:read']],
@@ -124,12 +124,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 }
