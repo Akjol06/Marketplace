@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service\User;
+namespace App\Service\Auth;
 
-use App\DTO\User\Input\RegisterUserInput;
+use App\DTO\Api\Input\RegisterUserInput;
 use App\Entity\User;
 use App\Exception\UserAlreadyExistsException;
 use App\Repository\UserRepository;

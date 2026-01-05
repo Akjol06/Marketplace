@@ -2,7 +2,7 @@
 
 namespace App\Mapper\User;
 
-use App\DTO\User\Output\RegisterUserOutput;
+use App\DTO\Api\Output\RegisterUserOutput;
 use App\Entity\User;
 
 class UserMapper

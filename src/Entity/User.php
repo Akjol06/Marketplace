@@ -4,12 +4,17 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
-use App\DTO\User\Input\RegisterUserInput;
-use App\DTO\User\Output\RegisterUserOutput;
+use App\DTO\Api\Input\LoginUserInput;
+use App\DTO\Api\Input\RegisterUserInput;
+use App\DTO\Api\Output\LoginUserOutput;
+use App\DTO\Api\Output\RegisterUserOutput;
 use App\Enum\UserRole;
 use App\Helper\EndpointRoutes;
+use App\State\Auth\LoginUserProcessor;
 use App\Repository\UserRepository;
-use App\State\User\UserRegistrationProcessor;
+use App\State\Auth\UserRegistrationProcessor;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -23,6 +28,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
             input: RegisterUserInput::class,
             output: RegisterUserOutput::class,
             processor: UserRegistrationProcessor::class,
+        ),
+        new Post(
+            uriTemplate: '/login',
+            input: LoginUserInput::class,
+            output: LoginUserOutput::class,
+            processor: LoginUserProcessor::class,
         ),
     ],
     normalizationContext: ['groups' => ['user:read']],

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\State\User;
+namespace App\State\Auth;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use App\DTO\User\Input\RegisterUserInput;
-use App\DTO\User\Output\RegisterUserOutput;
+use App\DTO\Api\Input\RegisterUserInput;
+use App\DTO\Api\Output\RegisterUserOutput;
 use App\Mapper\User\UserMapper;
-use App\Service\User\UserRegistrationService;
+use App\Service\Auth\UserRegistrationService;
 
 class UserRegistrationProcessor implements ProcessorInterface
 {
