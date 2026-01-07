@@ -7,6 +7,7 @@ use App\Entity\RefreshToken;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Uid\Uuid;
 
 class LoginUserService 
@@ -24,7 +25,7 @@ class LoginUserService
             ?? $repo->findOneBy(['phone' => $data->identifier]);
 
         if (!$user || !$this->hasher->isPasswordValid($user, $data->password)) {
-            throw new \Exception('Invalid credentials');
+            throw new CustomUserMessageAuthenticationException('Invalid credentials');
         }
 
         return $user;
